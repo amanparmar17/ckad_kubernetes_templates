@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: deployment
+  labels:
+    type: deployment
+    parent: ckad
+spec:
+  template:
+    metadata:
+      name: testing-pod
+      labels:
+        type: sample
+        parent: ckad
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          
+  replicas: 3
+  
+  selector:
+    matchLabels:
+      parent: ckad

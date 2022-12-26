@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rc-nginx
+  labels:
+    type: replicationcontroller
+    parent: ckad
+spec:
+  template:
+    metadata:
+      name: testing-pod
+      labels:
+        type: sample
+        parent: ckad
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 3

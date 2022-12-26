@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicationSet
+metadata:
+  name: rs-nginx
+  labels:
+    type: replicationset
+    parent: ckad
+spec:
+  template:
+    metadata:
+      name: testing-pod
+      labels:
+        type: sample
+        parent: ckad
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+  replicas: 3
+  selector:
+    matchLabels:
+      type: sample

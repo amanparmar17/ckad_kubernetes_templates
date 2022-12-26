@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testing-pod
+  labels:
+    type: sample
+    parent: ckad
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
