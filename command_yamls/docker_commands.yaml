@@ -1,0 +1,21 @@
+docker list images:
+  docker images
+
+docker list containers:
+  docker ps
+  list all container - even stopped:
+    docker ps -a
+
+run a container:
+  docker run ubuntu
+  run with a specific command:
+    docker run ubuntu sleep 5
+
+  build a docker file:
+    docker build -t image-name .
+    using a specific file from a directory:
+      docker build -t image-name . -f filename
+
+push image to docker hub:
+  docker push image-name
+

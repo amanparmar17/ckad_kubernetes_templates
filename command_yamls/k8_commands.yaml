@@ -1,0 +1,80 @@
+get_objects:
+  pods:
+    kubectl get pods
+    kubectl get pods -n <namespace>
+    kubectl get pods --all-namespaces
+    kubectl get pods | grep <filter string>
+    kubectl get pods -o wide
+  deployments:
+    kubectl get deployments
+  services:
+    kubectl get services
+  nodes:
+    kubectl get nodes
+  replicationController:
+    kubectl get replicationcontroller
+  replicaset:
+    kubectl get replicaset
+
+delete object:
+  kubectl delete object object_name
+  force delete all pods:
+    kubectl delete pods --all --grace-period=0 --force
+
+get cluster info:
+  kubectl cluster-info
+
+create a new pod:
+  kubectl run <name> --image=<image_name> --port=<forwarding port>
+  new pod with custome args for the container process:
+    kubectl run <name> --image=<image_name> -- arg1 arg2 arg3
+
+create a new deployment:
+  kubectl create deployment <deployment name> --image=image_name --replicas=replica-count --port=forwarding-port
+
+create element from a file:
+  kubectl create -f <filename>
+
+output configs to a file:
+  kubectl get pods <name> -o yaml > filename.yaml
+  kubectl get pods <name> -o json > filename.json
+  get output yaml without creating an object:
+    kubectl run redis --image=redis --dry-run=client -o yaml > output.yaml
+
+  example:
+    kubectl run redis --image=redis -o yaml > redis_template.yaml
+
+Apply changes to an object:
+  kubectl apply -f filename
+  kubectl edit object <object_name>
+  example:
+    kubectl edit pod podname
+
+Scale an object (replicaset/deployment):
+  kubectl scale --replicas=3 object object_name
+  kubectl scale --replicas=3 -f filename
+
+change namespace for the session:
+  kubens new-namespace
+  kubectl config set-context $(kubectl config current-context) --namespace=new_ns_name
+
+expose a pod / create a service to expose a pod:
+  kubectl expose pod podname --name=service-name --port=forwarding-port
+
+
+describe pod:
+  kubectl describe pod podname
+
+get logs:
+  kubectl logs podname 
+
+
+interactive shell for a pod:
+  kubectl exec -it podname -- /bin/bash
+
+create secrets:
+  kubectl create secret generic secret-name --from-file=KeyName=filename
+  kubectl create secret generic secret-name --from-literal=KeyName="string_value"
+
+get secrets:
+  kubectl get secrets
