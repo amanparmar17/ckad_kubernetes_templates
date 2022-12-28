@@ -15,6 +15,14 @@ get_objects:
     kubectl get replicationcontroller
   replicaset:
     kubectl get replicaset
+  configmaps:
+    kubectl get configmaps
+    describe:
+      kubectl describe configmaps configmap-name
+  service account:
+    kubectl get serviceaccount
+    describe:
+      kubectl describe serviceaccount serviceaccount-name
 
 delete object:
   kubectl delete object object_name
@@ -78,3 +86,32 @@ create secrets:
 
 get secrets:
   kubectl get secrets
+  describe secret:
+    kubectl describe secret secret-name
+
+create comfigmap inperatively:
+  kubectl create configmap <name> --from-literal=<key>=<value> \ --from-literal=<key>=<value>
+
+create serviceaccount:
+  kubectl create serviceaccount serviceaccount-name
+
+taint nodes:
+  kubectl taint nodes node-name key=value:taint-effect
+  taint-effects:
+    - NoSchedule
+    - PreferNoSchedule
+    - NoExecute
+  example:
+    kubectl taint nodes node1 app=blue:NoSchedule
+
+  see tains on a node:
+    kubectl describe node node-name | grep Taints
+
+  untaint a node:
+    kubectl taint nodes node-name taint_name-
+    # add a minus (-) to the taint name
+
+
+label nodes:
+  kubectl label nodes node-name label_key:label_value
+

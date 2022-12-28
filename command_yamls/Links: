@@ -1,0 +1,21 @@
+Enabling Encryption at Rest:
+	https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
+
+hashiCorp Vault:
+	https://www.vaultproject.io/
+
+Kubernetes Secrets: properties and Risks
+	https://kubernetes.io/docs/concepts/configuration/secret/
+
+Default Limit Range in Pods:
+	https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/
+
+Memory Resources:
+	https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/
+
+CKAD tips:
+	https://github.com/lucassha/CKAD-resources
+	https://medium.com/@harioverhere/ckas-certified-kubernetes-application-developer-my-journey-3afb0901014
+	https://www.linkedin.com/pulse/my-ckas-exam-experience-atharva-chauthaiwale
+
+

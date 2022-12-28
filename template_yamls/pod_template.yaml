@@ -1,3 +1,13 @@
+## Author: AMAN PARMAR
+#      Role : Data Engineer
+
+
+#### THIS YAML FILE IS NOT FUNCTIONAL AND SHOULD ONLY BE USED FOR REFERRING TO THE 
+#### SYNTAX-SEMANTICS OF DECLARING DIFFERENT PROPERTIES AND FUNCTIONALITIES OVER A POD
+
+
+
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -6,6 +16,111 @@ metadata:
     type: sample
     parent: ckad
 spec:
+  # POD LEVEL SECURITY CONTEXT
+  securityContext:
+    runAsUser: 1000
+    capabilities:
+      add: ["KILL"]
+
+
+  # SERVICE ACCOUNT
+  serviceAccountName: <service-account-name>
+
+  # automount SA - do not automatically mount any SA to the pod
+  automountServiceAccountToken: false
+
+
+  # TOLERATIONS:
+  # corresponding taint => kubectl taint nodes node1 app=blue:NoSchedule
+  tolerations: 
+    - key: "app"
+      operator: "Equal"
+      value: "blue"
+      effect: "NoSchedule"
+
+  # NODE SELECTOR
+  nodeSelector:
+    label_key: label-value
+
+
+  # NODE AFFINITY
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: size
+              operator: In
+              values:
+               - Large
+               - Medium
+            - key: size
+              operator: NotIn
+              values:
+               - Small
+               
+
   containers:
     - name: nginx-container
       image: nginx
+      ports:
+        containerPort: 8080
+
+      # CONTAINER LEVEL SECURITY CONTEXT
+      securityContext:
+        runAsUser: 2000
+        capabilities:
+          add: ["KILL"]
+      
+      # METHOD 1
+      # command: ["sleep", "1000"]
+
+      # METHOD 2
+      # command: "sleep 1000"
+
+      # METHOD 3
+      command: ["sleep"]
+      args: ["1000"]
+
+      # ENV VARS
+      env:
+        # METHOD 1 - using key-value pair
+        - name: a
+          value: a
+        
+        # METHOD 2 - using config maps
+        - name: b 
+          valueFrom:
+            configMapKeyRef:  
+              name: ckad-cfg-map
+              key: PARENT
+        
+        # METHOD 3 - using secrets
+        - name: c 
+          valueFrom:
+            secretKeyRef: 
+              name: <secret name>
+              key: <secret key>
+
+
+      # INJECT CONFIG MAP
+      envFrom:
+        - configMapRef:
+            name: ckad-cfg-map  #name of the config map created
+
+      # INJECT SECRETS;
+      envFrom:
+        secretRef:
+          name: <secret name>
+
+      # RESOURCE REQUIREMENT
+      resources:
+        requests:
+          cpu: 1
+          memory: "1Gi"
+        limits:
+          cpu: 2
+          memory: "2Gi"
+
+
+

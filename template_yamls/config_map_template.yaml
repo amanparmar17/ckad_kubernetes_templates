@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ckad-cfg-map
+data:
+  PARENT: ckad
+  TYPE: config_map
