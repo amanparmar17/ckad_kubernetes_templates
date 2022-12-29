@@ -75,6 +75,10 @@ describe pod:
 
 get logs:
   kubectl logs podname 
+  multi-container pod:
+    kubectl logs pod -c container
+  streaming logs:
+    kubectl logs -f pod -c container
 
 
 interactive shell for a pod:

@@ -124,3 +124,62 @@ spec:
 
 
 
+      # PERSISTENT VOLUME MOUNT
+      volumeMounts:
+        - name: volume-name
+          mountPath: location
+
+
+      # READINESS PROBE
+      readinessProbe:
+        # for http request
+        httpGet:
+          path: api-endpoint
+          port: 8080
+
+        # tcp Socket
+        # tcpSocket:
+        #   port: 8080
+
+        # command execution
+        # exec:
+        #   command:
+        #     - echo 'ALL SET'
+        #     - echo 'READY'
+
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        failureThreshold: 3
+
+
+      # LIVENESS PROBE
+      livenessProbe:
+        # for http request
+        httpGet:
+          path: api-endpoint
+          port: 8080
+
+        # tcp Socket
+        # tcpSocket:
+        #   port: 8080
+
+        # command execution
+        # exec:
+        #   command:
+        #     - echo 'ALL SET'
+        #     - echo 'READY'
+
+        initialDelaySeconds: 10
+        periodSeconds: 5
+        failureThreshold: 3
+
+
+
+
+
+
+  # INIT CONTAINERS
+  initContainers:
+    - name: nginx-init
+      image: nginx
+      command: []
