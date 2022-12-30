@@ -6,6 +6,12 @@ metadata:
     type: deployment
     parent: ckad
 spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+    # type: Recreate
   template:
     metadata:
       name: testing-pod
@@ -17,6 +23,7 @@ spec:
         - name: nginx-container
           image: nginx
           
+  # creates a replicaset
   replicas: 3
   
   selector:

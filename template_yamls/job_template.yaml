@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: testing-job
+spec:
+  # job instances
+  completions: 3
+
+  # to create the pods required for all the instances at the same time
+  parallelism: 3
+  template:
+    spec:
+      containers:
+        - name: testing-job-container
+          image: ubuntu
+          command: ["expr"]
+          args: ["3+3"]
+      restartPolicy: Never

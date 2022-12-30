@@ -58,6 +58,10 @@ spec:
               operator: NotIn
               values:
                - Small
+
+  # RESTART POLICY
+  restartPolicy: Always
+   # can also be Never, OnFailure
                
 
   containers:
